@@ -1,13 +1,16 @@
 package com.bolsadeides.springboot.web.app.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bolsadeides.springboot.web.app.model.Locacion;
 import com.bolsadeides.springboot.web.app.model.Usuario;
 
 @Controller
@@ -33,10 +36,24 @@ public class IndexController {
 	@RequestMapping("/listar")
 	public String listar(Model model){
 		List<Usuario> usuarios = new ArrayList<>();
+		usuarios.add(new Usuario("Jorge", "Meza", "jorge@gmail.com"));
+		usuarios.add(new Usuario("Daniel", "Lewis", "daniel.lewis@gmail.com"));
+		usuarios.add(new Usuario("Jane", "Parker", "jane-parker@gmail.com"));
+		usuarios.add(new Usuario("Tornado", "Roe", "tornado-roe@gmail.com"));
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("titulo", "Listado de Usuarios");
 		return "listar";
 	}
+	@RequestMapping("/locaciones")
+	public String locaciones(Model model){
+		model.addAttribute("titulo", "Lista de usuarios");
+		return "locaciones";
+	}
 	
+	@ModelAttribute("locaciones")
+	public List<Locacion> poblarLocaciones(){
+		List<Locacion> locaciones = Arrays.asList(new Locacion("Philadelphia", "Pennsylvania", "USA"), new Locacion("New York City", "New York", "USA"));
+		return locaciones;
+	}
 	
 }

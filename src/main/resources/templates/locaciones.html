@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title th:text="${titulo}"></title>
+</head>
+<body>
+	<h1 th:text="${titulo}"></h1>
+	<div th:if="${locaciones.size()==0}">
+		No hay locaciones en la lista
+	</div>
+	<table th:if="${locaciones.size()>0}">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Estado</th>
+				<th>País</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="locacion: ${locaciones}">
+				<td th:text="${locacion.nombre}"></td>
+				<td th:text="${locacion.estado}"></td>
+				<td th:text="${locacion.pais}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
