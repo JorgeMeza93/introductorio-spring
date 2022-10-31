@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,10 +17,16 @@ import com.bolsadeides.springboot.web.app.model.Usuario;
 @Controller
 @RequestMapping("/app/")
 public class IndexController {
+	@Value("${texto.indexcontroller.index.titulo}")
+	private String textoIndex;
+	@Value("${texto.indexcontroller.perfil.titulo}")
+	private String textoPerfil;
+	@Value("${texto.indexcontroller.listar.titulo}")
+	private String textoListar;
 	
 	@RequestMapping	(value = {"/index", "/", "", "/home"}, method = RequestMethod.GET)
 	public String index(Model model){
-		model.addAttribute("titulo", "Aprendiendo Spring");
+		model.addAttribute("titulo", textoIndex);
 		return "index";
 	}
 	
@@ -30,7 +37,7 @@ public class IndexController {
 		usuario1.setApellido("Meza");
 		usuario1.setEmail("jorge@gmail.com");
 		model.addAttribute("usuario", usuario1);
-		model.addAttribute("titulo", "Perfil del usuario".concat(usuario1.getNombre()));
+		model.addAttribute("titulo", textoPerfil.concat(usuario1.getNombre()));
 		return "perfil";
 	}
 	@RequestMapping("/listar")
@@ -46,7 +53,7 @@ public class IndexController {
 	}
 	@RequestMapping("/locaciones")
 	public String locaciones(Model model){
-		model.addAttribute("titulo", "Lista de usuarios");
+		model.addAttribute("titulo", textoListar);
 		return "locaciones";
 	}
 	
